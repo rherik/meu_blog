@@ -13,6 +13,7 @@ WORKDIR /djangoapp
 EXPOSE 8000
 
 RUN python -m venv /venv && \
+  /venv/bin/pip install --upgrade pip && \
   /venv/bin/pip install -r /djangoapp/requirements.txt && \
   adduser --disabled-password --no-create-home duser && \
   mkdir -p /data/web/static && \
@@ -26,6 +27,6 @@ RUN python -m venv /venv && \
 
 ENV PATH="/scripts:/venv/bin:$PATH"
 
-USER duser
+# USER duser
 
 CMD ["commands.sh"]
