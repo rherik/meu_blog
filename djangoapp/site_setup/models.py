@@ -10,9 +10,11 @@ class MenuLink(models.Model):
     text = models.CharField(max_length=50)
     url_or_path = models.CharField(max_length=2048)
     new_tab = models.BooleanField(default=False)
+    # MenuLink(filho de SiteSetup) depende de SiteSetup existir
+    # on_delete: Ao apagar o SiteSetup todos os MenuLinks são apagados
     site_setup = models.ForeignKey(
         'SiteSetup', on_delete=models.CASCADE, blank=True, null=True,
-        default=None,
+        default=None, related_name='menulink_set'
     )
 
     def __str__(self):
